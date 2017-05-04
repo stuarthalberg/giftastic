@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>GifTastic Homework SAH</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	
+	<link rel="stylesheet" href="./style.css">	
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.js"
+	  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+	  crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div id="buttonHolder"></div>
+	<div id="gifsGoHere"></div>
+	
+
+
+
+
+<script type="text/javascript">
+
+	var sports = ['hockey', 'baseball', 'football', 'basketball', 'tennis', 'golf'];
+	for (var i = 0; i < sports.length; i++) {
+		$("#buttonHolder").append("<button id=" + sports[i] + ">" + sports[i] + "</button>");
+	}
+
+
+	$('button').on('click', function() {
+		var arrayItem = $(this).attr("id");
+		console.log(arrayItem);
+		var queryURL = 'http://api.giphy.com/v1/gifs/search?q=' + arrayItem + '&api_key=dc6zaTOxFJmzC&limit=10';
+		$.ajax({url: queryURL, method: 'GET'})
+			.done(function(response) {
+				console.log(response);
+				for (var i = 0; i < response.data.length; i++) {
+					var gifDiv = $("<div>");
+					var p = $("<p>").text("Rating: " + response.data[i].rating);
+					var gifImg = $("<img>");
+					gifImg.attr("src", response.data[i].images.fixed_height.url);
+					gifDiv.append(p);
+					gifDiv.append(gifImg);
+					$("#gifsGoHere").append(gifDiv);
+				}
+
+			})
+
+
+	})
+
+
+</script>
+
+
+
+
+</body>
+</html>
