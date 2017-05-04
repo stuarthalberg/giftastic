@@ -30,7 +30,7 @@
 	$('button').on('click', function() {
 		var arrayItem = $(this).attr("id");
 		console.log(arrayItem);
-		var queryURL = 'http://api.giphy.com/v1/gifs/search?q=' + arrayItem + '&api_key=dc6zaTOxFJmzC&limit=10';
+		var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + arrayItem + '&api_key=dc6zaTOxFJmzC&limit=10';
 		$.ajax({url: queryURL, method: 'GET'})
 			.done(function(response) {
 				console.log(response);
